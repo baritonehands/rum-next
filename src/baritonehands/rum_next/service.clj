@@ -15,23 +15,25 @@
                                  {:status 200
                                   :body   (select-keys params [:number])})}}]]])
 
-(defn create []
-  (-> {::server/type   :jetty
-       ::server/port   3000
-       ::server/join?  false
-       ;; no pedestal routes
-       ::server/routes []}
-      (server/default-interceptors)
-      ;; swap the reitit router
-      (pedestal/replace-last-interceptor
-        (pedestal/routing-interceptor
-          (http/router
-            routes
-            {:data {:muuntaja m/instance
-                    :interceptors [(parameters/parameters-interceptor)
-                                   (muuntaja/format-negotiate-interceptor)
-                                   (muuntaja/format-response-interceptor)
-                                   (exception/exception-interceptor)
-                                   (muuntaja/format-request-interceptor)]}})))
-      (server/dev-interceptors)
-      (server/create-server)))
+(defn create
+  ([] (create {}))
+  ([opts]
+   (-> {:env                   :prod
+        ::server/type          :jetty
+        ::server/port          3000
+        ::server/resource-path "/public"
+        ;; no pedestal routes
+        ::server/routes        []}
+       (merge opts)
+       (server/default-interceptors)
+       ;; swap the reitit router
+       (pedestal/replace-last-interceptor
+         (pedestal/routing-interceptor
+           (http/router
+             routes
+             {:data {:muuntaja     m/instance
+                     :interceptors [(parameters/parameters-interceptor)
+                                    (muuntaja/format-negotiate-interceptor)
+                                    (muuntaja/format-response-interceptor)
+                                    (exception/exception-interceptor)
+                                    (muuntaja/format-request-interceptor)]}}))))))

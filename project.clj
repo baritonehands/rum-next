@@ -11,7 +11,17 @@
                  [metosin/reitit-core "0.5.13"]
                  [metosin/reitit-pedestal "0.5.13"]
                  [metosin/reitit-interceptors "0.5.13"]
-                 [rum "0.12.6"]]
-  :main ^:skip-aot baritonehands.rum-next
+                 [rum "0.12.6"]
+                 [org.clojure/clojurescript "1.10.764"]]
+  :main ^:skip-aot baritonehands.rum-next.core
   :target-path "target/%s"
-  :profiles {:uberjar {:aot :all}})
+  :aliases {"fig"       ["trampoline" "run" "-m" "figwheel.main"]
+            "build-dev" ["trampoline" "run" "-m" "figwheel.main" "-b" "dev" "-r"]}
+  :profiles {:dev     {:dependencies [[com.bhauman/figwheel-main "0.2.13"]
+                                      [cider/piggieback "0.5.2"]
+                                      [javax.xml.bind/jaxb-api "2.3.0"]
+                                      [com.sun.xml.bind/jaxb-core "2.3.0"]
+                                      [com.sun.xml.bind/jaxb-impl "2.3.0"]]
+                       :repl-options {:nrepl-middleware [cider.piggieback/wrap-cljs-repl]
+                                      :init-ns          user}}
+             :uberjar {:aot :all}})

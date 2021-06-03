@@ -1,0 +1,8 @@
+{:output-to       "resources/public/js/app.js"
+ :output-dir      "resources/public/js/dev-out"
+ :source-map      true
+ :asset-path      "js/dev-out"
+ :optimizations   :none
+ :cache-analysis  true
+ :main            baritonehands.rum-next.core
+ :closure-defines {goog.DEBUG true}}
