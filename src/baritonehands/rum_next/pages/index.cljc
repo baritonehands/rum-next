@@ -1,5 +1,9 @@
 (ns baritonehands.rum-next.pages.index
-  (:require [rum.core :as rum]))
+  (:require [rum.core :as rum]
+            [baritonehands.rum-next.components.footer :as footer]))
 
-(rum/defc root []
-  [:h1 "Hello, World"])
+(rum/defc root [props]
+  [:div
+   [:h1 "Hello, " (get props :foo "World")]
+   (footer/view)])
+

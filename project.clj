@@ -11,6 +11,7 @@
                  [metosin/reitit-core "0.5.13"]
                  [metosin/reitit-pedestal "0.5.13"]
                  [metosin/reitit-interceptors "0.5.13"]
+                 [metosin/reitit-frontend "0.5.13"]
                  [rum "0.12.6"]
                  [org.clojure/clojurescript "1.10.764"]]
   :main ^:skip-aot baritonehands.rum-next.core

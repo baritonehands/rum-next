@@ -1,5 +1,6 @@
 (ns baritonehands.rum-next.service
   (:require [io.pedestal.http :as server]
+            [io.pedestal.http.content-negotiation :as content]
             [muuntaja.core :as m]
             [reitit.pedestal :as pedestal]
             [reitit.http :as http]
@@ -10,6 +11,8 @@
 
 (def routes
   [["/" {:get {:handler pages/index}}]
+   ["/reactive" {:get {:handler pages/reactive}}]
+   ["/local" {:get {:handler pages/local}}]
    ["/api"
     ["/number" {:get {:handler (fn [{:keys [params]}]
                                  {:status 200
@@ -36,4 +39,5 @@
                                     (muuntaja/format-negotiate-interceptor)
                                     (muuntaja/format-response-interceptor)
                                     (exception/exception-interceptor)
-                                    (muuntaja/format-request-interceptor)]}}))))))
+                                    (muuntaja/format-request-interceptor)]}})))
+       (update ::server/interceptors conj (content/negotiate-content ["text/html" "application/json"])))))
