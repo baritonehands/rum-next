@@ -7,14 +7,21 @@
             [baritonehands.rum-next.pages.index :as index]
             [baritonehands.rum-next.pages.reactive :as reactive]
             [baritonehands.rum-next.pages.local :as local]
-            [baritonehands.rum-next.components.footer :as footer]))
+            [baritonehands.rum-next.components.footer :as footer]
+            [baritonehands.rum-next.pages.artists :as artists]
+            [baritonehands.rum-next.pages.albums :as albums]))
 
 ; Define the routes here for now, until I can combine them
 (def routes
   [["/"
     ["" {:view index/root}]
-    ["reactive" {:view reactive/page}]
-    ["local" {:view local/page}]]])
+    ["artists"
+     ["" {:view artists/index}]
+     ["/:id" {:view artists/detail}]]
+    ["albums"
+     ["/:id" {:view albums/detail}]]
+    ["local" {:view local/page}]
+    ["reactive" {:view reactive/page}]]])
 
 (defonce match (atom nil))
 (defonce fetching (atom nil))

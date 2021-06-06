@@ -12,6 +12,10 @@
                  [metosin/reitit-pedestal "0.5.13"]
                  [metosin/reitit-interceptors "0.5.13"]
                  [metosin/reitit-frontend "0.5.13"]
+                 [com.github.seancorfield/next.jdbc "1.2.659"]
+                 [com.github.seancorfield/honeysql "2.0.0-rc2"]
+                 [org.xerial/sqlite-jdbc "3.34.0"]
+                 [camel-snake-kebab "0.4.0"]
                  [rum "0.12.6"]
                  [org.clojure/clojurescript "1.10.764"]]
   :main ^:skip-aot baritonehands.rum-next.core

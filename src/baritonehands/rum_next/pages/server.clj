@@ -1,10 +1,12 @@
 (ns baritonehands.rum-next.pages.server
   (:require [rum.core :as rum]
-            [muuntaja.core :as m]))
+            [muuntaja.core :as m]
+            [clojure.string :as str]))
 
 (defn full-page [component props]
   [:html
    [:head
+    [:base {:href "/"}]
     [:meta {:charset "UTF-8"}]
     [:meta {:name "viewport" :content "width=device-width, initial-scale=1.0"}]
     [:link {:rel "stylesheet" :href "css/reset.css"}]]
@@ -17,10 +19,11 @@
 
 (defn page-handler [component props-fn]
   (fn [{headers                 :headers
-        {:keys [field subtype]} :accept}]
+        {:keys [field subtype]} :accept
+        :as                     request}]
     (let [debug-delay (-> (get headers "x-debug-delay" "0")
                           (Integer/parseInt))
-          props (props-fn)]
+          props (props-fn request)]
       (if (= subtype "html")
         {:status  200
          :headers {"Content-Type" field}
@@ -37,3 +40,13 @@
      {:status  200
       :headers {"Content-Type" "text/html"}
       :body    (rum/render-static-markup (full-page ~component (constantly {})))}))
+
+(defn ns->page-name [ns]
+  (->> (-> (ns-name ns)
+           (str)
+           (str/split #"\."))
+       (drop 3)
+       (str/join "/")))
+
+(defn page [component props-fn]
+  `(let []))

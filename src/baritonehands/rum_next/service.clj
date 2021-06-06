@@ -10,13 +10,12 @@
             [baritonehands.rum-next.pages :as pages]))
 
 (def routes
-  [["/" {:get {:handler pages/index}}]
-   ["/reactive" {:get {:handler pages/reactive}}]
-   ["/local" {:get {:handler pages/local}}]
-   ["/api"
-    ["/number" {:get {:handler (fn [{:keys [params]}]
-                                 {:status 200
-                                  :body   (select-keys params [:number])})}}]]])
+  (into
+    pages/routes
+    [["/api"
+      ["/number" {:get {:handler (fn [{:keys [params]}]
+                                   {:status 200
+                                    :body   (select-keys params [:number])})}}]]]))
 
 (defn create
   ([] (create {}))
