@@ -18,4 +18,5 @@
     (for [{album-id    :id
            album-title :title} albums]
       [:li {:key album-id}
-       [:a {:href (str "/albums/" album-id)} album-title]])]])
+       [:a {:href (str "/albums/" album-id)} album-title]])]
+   (footer/view)])
