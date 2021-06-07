@@ -34,5 +34,6 @@
            [:p {:id (str "track" (inc idx))}
             [:span [:span "Composer:"] " " [:span (:composer track)] [:br]]
             [:span [:span "Duration:"] " " [:span (ms->duration (:milliseconds track))]  [:br]]
-            [:span [:span "Size:"] " " [:span (bytes->size (:bytes track))] [:br]]])])]
+            [:span [:span "Size:"] " " [:span (bytes->size (:bytes track))] [:br]]
+            [:span [:span "Price:"] " $" [:span (:unit-price track)] [:br]]])])]
      (footer/view)]))

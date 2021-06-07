@@ -9,7 +9,8 @@
             [baritonehands.rum-next.pages.local :as local]
             [baritonehands.rum-next.components.footer :as footer]
             [baritonehands.rum-next.pages.artists :as artists]
-            [baritonehands.rum-next.pages.albums :as albums]))
+            [baritonehands.rum-next.pages.albums :as albums]
+            [baritonehands.rum-next.pages.playlists :as playlists]))
 
 ; Define the routes here for now, until I can combine them
 (def routes
@@ -20,6 +21,9 @@
      ["/:id" {:view artists/detail}]]
     ["albums"
      ["/:id" {:view albums/detail}]]
+    ["playlists"
+     ["" {:view playlists/index}]
+     ["/:id" {:view playlists/detail}]]
     ["local" {:view local/page}]
     ["reactive" {:view reactive/page}]]])
 

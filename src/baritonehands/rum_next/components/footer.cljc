@@ -8,6 +8,8 @@
    " "
    [:a {:href "/artists"} "Artists"]
    " "
+   [:a {:href "/playlists"} "Playlists"]
+   " "
    [:a {:href "/reactive"} "Reactive"]
    " "
    [:a {:href "/local"} "Local"]])
