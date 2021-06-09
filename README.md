@@ -1,36 +1,16 @@
 # rum-next
 
-FIXME: description
+An example app for building a NextJS style app in Clojure(Script) and RUM.
 
 ## Installation
 
-Download from http://example.com/FIXME.
+Requires [Leiningen](https://leiningen.org) and JDK 8+.
 
 ## Usage
 
-FIXME: explanation
+Currently only works from the repl. Start a repl using Leiningen/IntelliJ, then:
 
-    $ java -jar rum-next-0.1.0-standalone.jar [args]
+    => (start-server!)
+    => (start-figwheel)
 
-## Options
-
-FIXME: listing of options this app accepts.
-
-## Examples
-
-...
-
-### Bugs
-
-...
-
-### Any Other Sections
-### That You Think
-### Might be Useful
-
-## License
-
-Copyright © 2021 FIXME
-
-Distributed under the Eclipse Public License either version 1.0 or (at
-your option) any later version.
+Then navigate to [localhost:3000](http://localhost:3000)
