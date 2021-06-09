@@ -4,8 +4,8 @@
             [baritonehands.rum-next.db.albums :as albums-db]))
 
 (defn index! [_]
-  (-> (artists-db/index)
-      (db/execute!)))
+  {:artists (-> (artists-db/index)
+                (db/execute!))})
 
 (defn detail! [request]
   (let [id (get-in request [:path-params :id])
@@ -13,4 +13,4 @@
                    (db/execute-one!))
         albums (-> (albums-db/for-artist id)
                    (db/execute!))]
-    (assoc artist :albums albums)))
+    {:artist (assoc artist :albums albums)}))

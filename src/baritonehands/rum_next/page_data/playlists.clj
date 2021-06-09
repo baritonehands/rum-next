@@ -4,13 +4,13 @@
             [baritonehands.rum-next.db.tracks :as tracks-db]))
 
 (defn index! [_]
-  (-> (playlists-db/index)
-      (db/execute!)))
+  {:playlists (-> (playlists-db/index)
+                  (db/execute!))})
 
 (defn detail! [request]
   (let [id (get-in request [:path-params :id])
         playlist (-> (playlists-db/detail id)
-                   (db/execute-one!))
+                     (db/execute-one!))
         tracks (-> (tracks-db/for-playlist id)
                    (db/execute!))]
-    (assoc playlist :tracks tracks)))
+    {:playlist (assoc playlist :tracks tracks)}))

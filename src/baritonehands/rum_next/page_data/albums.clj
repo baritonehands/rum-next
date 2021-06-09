@@ -9,4 +9,4 @@
                   (db/execute-one!))
         tracks (-> (tracks-db/for-album id)
                    (db/execute!))]
-    (assoc album :tracks tracks)))
+    {:album (assoc album :tracks tracks)}))

@@ -1,5 +1,6 @@
 (ns baritonehands.rum-next.pages.albums
   (:require [rum.core :as rum]
+            [baritonehands.rum-next.components.links :as links]
             [baritonehands.rum-next.components.footer :as footer]))
 
 (defn ms->duration [ms]
@@ -15,16 +16,20 @@
                         :else [bytes "B"])]
     (str (.toFixed amount 2) unit)))
 
-(rum/defcs detail < (rum/local -1 ::selected) [state {:keys [artist-id artist-name title tracks]}]
+(rum/defcs detail < (rum/local -1 ::selected) [state {{:keys [artist-id artist-name title tracks]} :album
+                                                      router                                       :reitit.core/router}]
   (let [selected (::selected state)]
     [:div
-     [:div [:a {:href (str "/artists/" artist-id)} artist-name]]
+     [:div (links/page {:router      router
+                        :page        :pages.artists/detail
+                        :path-params {:id artist-id}}
+                       artist-name)]
      [:h2 title]
      [:h3 "Tracks"]
      [:ol
       (for [[idx track] (map-indexed vector tracks)]
         [:li {:key (:track-id track)}
-         [:a {:role "button"
+         [:a {:role     "button"
               :on-click (fn [event]
                           (reset! selected idx)
                           (.preventDefault event)
@@ -33,7 +38,7 @@
          (if (= idx @selected)
            [:p {:id (str "track" (inc idx))}
             [:span [:span "Composer:"] " " [:span (:composer track)] [:br]]
-            [:span [:span "Duration:"] " " [:span (ms->duration (:milliseconds track))]  [:br]]
+            [:span [:span "Duration:"] " " [:span (ms->duration (:milliseconds track))] [:br]]
             [:span [:span "Size:"] " " [:span (bytes->size (:bytes track))] [:br]]
             [:span [:span "Price:"] " $" [:span (:unit-price track)] [:br]]])])]
      (footer/view)]))
